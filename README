@@ -23,7 +23,7 @@ cd Ecommercedb
 # Build and run the Docker containers
 docker-compose up --build
 
-Start the container:
+Start the container if you have already built it but want to run:
 docker-compose up
 
 remember to delete the container afterwards by using:
