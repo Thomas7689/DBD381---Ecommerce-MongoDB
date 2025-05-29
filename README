@@ -1,0 +1,30 @@
+# E-commerce Marketplace – NoSQL MongoDB Project
+
+This project is a containerized **Node.js** application that uses **MongoDB Atlas** as its NoSQL distributed database. It is designed for an e-commerce marketplace, handling scalable product, user, and order data in the cloud.
+
+---
+
+## Project Features
+
+- Node.js backend with MongoDB Atlas integration  
+- Dockerized using Docker and Docker Compose  
+- Modular structure with models, seed data, and environment configurations  
+- Clean and scalable architecture  
+
+---
+
+## How to Build and Run
+
+Make sure you are in the correct repository directory:
+
+```bash
+cd Ecommercedb
+
+# Build and run the Docker containers
+docker-compose up --build
+
+Start the container:
+docker-compose up
+
+remember to delete the container afterwards by using:
+docker-compose down
