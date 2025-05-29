@@ -19,11 +19,22 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("Connection error", err));
+  .then(() => console.log(" MongoDB connected"))
+  .catch((err) => console.error(" Connection error", err));
+
+const path = require('path');
+
+// Serve static frontend files from root directory
+app.use(express.static(path.join(__dirname)));
+
 
 
 // Routes
+
+app.get("/", (req, res) => {
+  res.send("E-commerce API is running");
+});
+
 
 // Get all products
 app.get("/products", async (req, res) => {
@@ -172,5 +183,5 @@ app.post("/products/:productId/reviews", async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = /*process.env.PORT ||*/ 5000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
