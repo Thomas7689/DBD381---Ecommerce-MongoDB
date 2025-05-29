@@ -89,9 +89,9 @@
       <!-- View & Search -->
       <div class="section">
         <h2>🔍 View & Search</h2>
-        <button onclick="getProducts()">📦 Get All Products</button>
-        <button onclick="getUsers()">👤 Get All Users</button>
-        <button onclick="getOrders()">🧾 Get All Orders</button>
+        <button onclick="getProducts()">Get All Products</button>
+        <button onclick="getUsers()">Get All Users</button>
+        <button onclick="getOrders()">Get All Orders</button>
 
         <label>Search Products by Category:
           <input type="text" id="searchCategory" placeholder="e.g. Electronics">
@@ -106,7 +106,7 @@
 
       <!-- Add Product -->
       <form id="productForm" class="section">
-        <h2>➕ Add Product</h2>
+        <h2>Add Product</h2>
         <label>Name: <input type="text" id="name" required></label>
         <label>Category: <input type="text" id="category" required></label>
         <label>Price: <input type="number" id="price" step="0.01" required></label>
@@ -116,7 +116,7 @@
 
       <!-- Delete Product -->
       <form id="deleteForm" class="section">
-        <h2>❌ Delete a Product</h2>
+        <h2>Delete a Product</h2>
         <label>Select Product:
           <select id="deleteSelect"></select>
         </label>
@@ -125,7 +125,7 @@
 
       <!-- Add User -->
       <form id="userForm" class="section">
-        <h2>👤 Add User</h2>
+        <h2>Add User</h2>
         <label>First Name: <input type="text" id="userFirstName" required></label>
         <label>Last Name: <input type="text" id="userLastName" required></label>
         <label>Email: <input type="email" id="userEmail" required></label>
@@ -135,7 +135,7 @@
 
       <!-- Create Order -->
       <form id="orderForm" class="section">
-        <h2>🧾 Create Order</h2>
+        <h2>Create Order</h2>
         <label>Customer ID: <input type="text" id="orderCustomerId" required></label>
         <label>Product ID(s) (comma-separated): <input type="text" id="orderProductIds" required></label>
         <label>Quantity for each: <input type="number" id="orderQuantity" value="1"></label>
@@ -144,7 +144,7 @@
 
       <!-- Cart -->
       <form id="cartForm" class="section">
-        <h2>🛒 Add to Cart</h2>
+        <h2>Add to Cart</h2>
         <label>User ID: <input type="text" id="cartUserId" required></label>
         <label>Product ID: <input type="text" id="cartProductId" required></label>
         <label>Quantity: <input type="number" id="cartQuantity" value="1" required></label>
@@ -152,7 +152,7 @@
       </form>
 
       <div class="section">
-        <h2>🧺 View Cart</h2>
+        <h2>View Cart</h2>
         <label>User ID: <input type="text" id="viewCartUserId">
           <button onclick="viewCart()">View Cart</button>
         </label>
@@ -160,7 +160,7 @@
 
       <!-- Reviews -->
       <form id="reviewForm" class="section">
-        <h2>📝 Add Product Review</h2>
+        <h2>Add Product Review</h2>
         <label>Product ID: <input type="text" id="reviewProductId" required></label>
         <label>User ID: <input type="text" id="reviewUserId" required></label>
         <label>Rating (1–5): <input type="number" id="reviewRating" min="1" max="5" required></label>
@@ -308,7 +308,7 @@
       const userId = document.getElementById("viewCartUserId").value;
       const res = await fetch(`${baseURL}/cart/${userId}`);
       const data = await res.json();
-      document.getElementById("output").innerHTML = `<h3>🧺 Cart Contents:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+      document.getElementById("output").innerHTML = `<h3>Cart Contents:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
     }
 
     document.getElementById("reviewForm").addEventListener("submit", async (e) => {
