@@ -15,6 +15,7 @@ This project is a containerized **Node.js** application that uses **MongoDB Atla
 
 ## How to Build and Run
 
+Ensure that Docker is running.
 Make sure you are in the correct repository directory:
 
 ```bash
