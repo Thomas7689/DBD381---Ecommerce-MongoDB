@@ -1,187 +1,481 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
 
-dotenv.config();
+<!DOCTYPE html>
+<html lang="en">
 
-const Product = require("./models/Product");
-const User = require("./models/User");
-const Order = require("./models/Order");
-const Cart = require("./models/Cart");
-const Review = require("./models/Review");
-
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log(" MongoDB connected"))
-  .catch((err) => console.error(" Connection error", err));
-
-const path = require('path');
-
-// Serve static frontend files from root directory
-app.use(express.static(path.join(__dirname)));
-
-
-
-// Routes
-
-app.get("/", (req, res) => {
-  res.send("E-commerce API is running");
-});
-
-
-// Get all products
-app.get("/products", async (req, res) => {
-  const products = await Product.find();
-  res.json(products);
-});
-
-// Add a product
-app.post("/products", async (req, res) => {
-  const product = new Product(req.body);
-  await product.save();
-  res.json(product);
-});
-
-// Get all customers
-app.get("/users", async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
-// Create an order
-app.post("/orders", async (req, res) => {
-  const order = new Order(req.body);
-  await order.save();
-  res.json(order);
-});
-
-// Get all orders (with populated data)
-app.get("/orders", async (req, res) => {
-  const orders = await Order.find()
-    .populate("customer")
-    .populate("products.product");
-  res.json(orders);
-});
-
-// Get single order
-app.get("/orders/:id", async (req, res) => {
-  const order = await Order.findById(req.params.id)
-    .populate("customer")
-    .populate("products.product");
-  res.json(order);
-});
-
-// DELETE product
-app.delete("/products/:id", async (req, res) => {
-  const result = await Product.findByIdAndDelete(req.params.id);
-  res.json(result);
-});
-
-//Filter products 
-app.get("/products/search/:category", async (req, res) => {
-  const category = req.params.category;
-  const products = await Product.find({ category: new RegExp(category, "i") });
-  res.json(products);
-});
-
-//Create User
-app.post("/users", async (req, res) => {
-  const user = new User(req.body);
-  await user.save();
-  res.json(user);
-});
-
-//Search for a user
-app.get("/users/search/:query", async (req, res) => {
-  const query = req.params.query;
-  const users = await User.find({
-    $or: [
-      { firstName: new RegExp(query, "i") },
-      { lastName: new RegExp(query, "i") },
-      { email: new RegExp(query, "i") }
-    ]
-  });
-  res.json(users);
-});
-
-//Add to cart
-app.post("/cart/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const { productId, quantity } = req.body;
-
-  let cart = await Cart.findOne({ user: userId });
-  if (!cart) {
-    cart = new Cart({ user: userId, items: [] });
-  }
-
-  const existingItem = cart.items.find(item => item.product.equals(productId));
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    cart.items.push({ product: productId, quantity });
-  }
-
-  cart.updatedAt = new Date();
-  await cart.save();
-  res.json(cart);
-});
-
-
-//Create new order
-app.post("/orders", async (req, res) => {
-  const { customerId, productIds } = req.body;
-
-  let totalAmount = 0;
-  const orderProducts = [];
-
-  for (const { productId, quantity } of productIds) {
-    const product = await Product.findById(productId);
-    if (product) {
-      totalAmount += product.price * quantity;
-      orderProducts.push({ product: product._id, quantity });
+<head>
+  <meta charset="UTF-8" />
+  <title>E-Commerce API Tester</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f4f4f4;
     }
-  }
 
-  const order = new Order({
-    customer: customerId,
-    products: orderProducts,
-    totalAmount,
-    orderDate: new Date(),
-  });
+    h1,
+    h2 {
+      color: #333;
+    }
 
-  await order.save();
-  res.json(order);
-});
+    form,
+    .section {
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-//Get user cart
-app.get("/cart/:userId", async (req, res) => {
-  const cart = await Cart.findOne({ user: req.params.userId }).populate("items.product");
-  res.json(cart);
-});
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
 
-//Reviews
-app.post("/products/:productId/reviews", async (req, res) => {
-  const { productId } = req.params;
-  const { userId, rating, comment } = req.body;
+    input,
+    select {
+      padding: 0.5rem;
+      width: 300px;
+    }
 
-  const product = await Product.findById(productId);
-  product.reviews.push({ userId, rating, comment });
-  await product.save();
-  res.json(product);
-});
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    #output {
+      background: #fff;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .left {
+      flex: 2;
+      max-width: 65%;
+    }
+
+    .right {
+      flex: 1;
+      max-width: 35%;
+      height: 100vh;
+      position: sticky;
+      top: 1rem;
+      background: #fff;
+      border-left: 2px solid #ccc;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    #output {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>E-Commerce API Tester</h1>
+
+  <div class="container">
+    <div class="left">
+      <!-- View & Search -->
+      <div class="section">
+        <h2>View & Search</h2>
+        <button onclick="getProducts()">Get All Products</button>
+        <button onclick="getUsers()">Get All Users</button>
+        <button onclick="getOrders()">Get All Orders</button>
+
+        <label>Search Products by Category:
+          <input type="text" id="searchCategory" placeholder="e.g. Electronics">
+          <button onclick="searchProducts()">Search</button>
+        </label>
+
+        <label>Search Users by Name or Email:
+          <input type="text" id="searchUserQuery">
+          <button onclick="searchUsers()">Search</button>
+        </label>
+      </div>
+
+      <!-- Add Product -->
+      <form id="productForm" class="section">
+        <h2>Add Product</h2>
+        <label>Name: <input type="text" id="name" required></label>
+        <label>Category: <input type="text" id="category" required></label>
+        <label>Price: <input type="number" id="price" step="0.01" required></label>
+        <label>Inventory: <input type="number" id="inventory" required></label>
+        <button type="submit">Add Product</button>
+      </form>
+
+      <!-- Delete Product -->
+      <form id="deleteForm" class="section">
+        <h2>Delete a Product</h2>
+        <label>Select Product:
+          <select id="deleteSelect"></select>
+        </label>
+        <button type="submit">Delete Product</button>
+      </form>
+
+      <!-- Add User -->
+      <form id="userForm" class="section">
+        <h2>Add User</h2>
+        <label>First Name: <input type="text" id="userFirstName" required></label>
+        <label>Last Name: <input type="text" id="userLastName" required></label>
+        <label>Email: <input type="email" id="userEmail" required></label>
+        <label>Role: <input type="text" id="userRole" value="customer"></label>
+        <button type="submit">Add User</button>
+      </form>
+
+      <!-- Create Order -->
+      <form id="orderForm" class="section">
+        <h2>Create Order</h2>
+        <label>Customer ID: <input type="text" id="orderCustomerId" required></label>
+        <label>Product ID(s) (comma-separated): <input type="text" id="orderProductIds" required></label>
+        <label>Quantity for each: <input type="number" id="orderQuantity" value="1"></label>
+        <button type="submit">Place Order</button>
+      </form>
+
+      <!-- Cart -->
+      <form id="cartForm" class="section">
+        <h2>Add to Cart</h2>
+        <label>User ID: <input type="text" id="cartUserId" required></label>
+        <label>Product ID: <input type="text" id="cartProductId" required></label>
+        <label>Quantity: <input type="number" id="cartQuantity" value="1" required></label>
+        <button type="submit">Add to Cart</button>
+      </form>
+
+      <div class="section">
+        <h2>View Cart</h2>
+        <label>User ID: <input type="text" id="viewCartUserId">
+          <button onclick="viewCart()">View Cart</button>
+        </label>
+      </div>
+
+      <!-- Reviews -->
+      <form id="reviewForm" class="section">
+        <h2>Add Product Review</h2>
+        <label>Product ID: <input type="text" id="reviewProductId" required></label>
+        <label>User ID: <input type="text" id="reviewUserId" required></label>
+        <label>Rating (1–5): <input type="number" id="reviewRating" min="1" max="5" required></label>
+        <label>Comment: <input type="text" id="reviewComment" required></label>
+        <button type="submit">Submit Review</button>
+      </form>
+    </div>
+
+    <div class="right">
+      <!-- Output -->
+      <div id="output"><strong>Output will appear here:</strong></div>
+    </div>
+  </div>
+  <script>
+    const baseURL = 'http://localhost:5000';
+
+    async function getProducts() {
+      const res = await fetch(`${baseURL}/products`);
+      const data = await res.json();
+
+      let html = `<h3>Products:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(products => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${products.name}<br>
+            <strong>ID:</strong> ${products._id}<br>
+            <strong>Category:</strong> ${products.category}<br>
+            <strong>Price:</strong> ${products.price}<br>
+            <strong>Total inventory:</strong> ${products._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+      updateDeleteDropdown();
+    }
+
+    async function getUsers() {
+      const res = await fetch(`${baseURL}/users`);
+      const data = await res.json();
+
+      let html = `<h3>Users:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(user => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${user.firstName} ${user.lastName}<br>
+            <strong>Email:</strong> ${user.email}<br>
+            <strong>Role:</strong> ${user.role}<br>
+            <strong>ID:</strong> ${user._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+    }
+
+    async function getOrders() {
+      const res = await fetch(`${baseURL}/orders`);
+      const data = await res.json();
+
+      let html = '<h3>Orders:</h3>';
+
+      data.forEach(order => {
+        html += `
+      <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px; border-radius:6px;">
+        <strong>Customer ID:</strong> ${order.customer?._id || order.customer}<br>
+        <strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleString()}<br>
+        <strong>Payment Status:</strong> ${order.paymentStatus}<br>
+        <strong>Total Amount:</strong> $${order.totalAmount}<br>
+        <strong>Products:</strong>
+        <ul style="margin: 0; padding-left: 80px; padding-top: 0px">
+    `;
+
+        order.products.forEach(p => {
+          const productId = p.product?._id || p.product;
+          const productName = p.product?.name || 'N/A';
+          html += `<li>Product ID: ${productId} (Quantity: ${p.quantity})</li>`;
+        });
+
+        html += '</ul></div>';
+      });
+
+      document.getElementById('output').innerHTML = html;
+    }
+
+    async function searchProducts() {
+      const category = document.getElementById('searchCategory').value;
+      const res = await fetch(`${baseURL}/products/search/${category}`);
+      const data = await res.json();
+
+      let html = `<h3>Products:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(products => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${products.name}<br>
+            <strong>ID:</strong> ${products._id}<br>
+            <strong>Category:</strong> ${products.category}<br>
+            <strong>Price:</strong> ${products.price}<br>
+            <strong>Total inventory:</strong> ${products._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+
+    }
+
+    async function searchUsers() {
+      const query = document.getElementById('searchUserQuery').value;
+      const res = await fetch(`${baseURL}/users/search/${query}`);
+      const data = await res.json();
+
+      let html = `<h3>Users:</h3><ul style="list-style: none; padding: 0;">`;
 
 
-const PORT = /*process.env.PORT ||*/ 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+      data.forEach(user => {
+        html += `
+        <li>
+            <strong>Name:</strong> ${user.firstName} ${user.lastName}<br>
+            <strong>Email:</strong> ${user.email}<br>
+            <strong>Role:</strong> ${user.role}<br>
+            <strong>ID:</strong> ${user._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+    }
+
+    async function updateDeleteDropdown() {
+      const res = await fetch(`${baseURL}/products`);
+      const products = await res.json();
+      const select = document.getElementById('deleteSelect');
+      select.innerHTML = "";
+      products.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p._id;
+        option.textContent = `${p.name} (${p.category})`;
+        select.appendChild(option);
+      });
+    }
+
+    document.getElementById("productForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const product = {
+        name: document.getElementById("name").value,
+        category: document.getElementById("category").value,
+        price: parseFloat(document.getElementById("price").value),
+        inventory: parseInt(document.getElementById("inventory").value)
+      };
+      const res = await fetch(`${baseURL}/products`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product)
+      });
+
+      let html = `<h3>Product Added:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>Name:</strong> ${document.getElementById("name").value}<br>
+            <strong>Category:</strong> ${document.getElementById("category").value}<br>
+            <strong>Price:</strong> ${document.getElementById("price").value}<br>
+            <strong>Inventory:</strong> ${document.getElementById("inventory").value}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+      const result = await res.json();
+      e.target.reset();
+      updateDeleteDropdown();
+    });
+
+    document.getElementById("deleteForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = document.getElementById("deleteSelect").value;
+      const res = await fetch(`${baseURL}/products/${id}`, { method: "DELETE" });
+      const result = await res.json();
+
+      let html = `<h3>Product Deleted:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>Name:</strong> ${result.name}<br>
+            <strong>Category:</strong> ${result._id}<br>
+            <strong>Price:</strong> ${result.category}<br>
+            <strong>Inventory:</strong> ${result.price}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById("output").innerHTML = html;
+      updateDeleteDropdown();
+    });
+
+    document.getElementById("userForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const user = {
+        firstName: document.getElementById("userFirstName").value,
+        lastName: document.getElementById("userLastName").value,
+        email: document.getElementById("userEmail").value,
+        role: document.getElementById("userRole").value
+      };
+      const res = await fetch(`${baseURL}/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      });
+      const result = await res.json();
+
+      let html = `<h3>User Added:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>First name:</strong> ${document.getElementById("userFirstName").value}<br>
+            <strong>Last name:</strong> ${document.getElementById("userLastName").value}<br>
+            <strong>Email:</strong> ${document.getElementById("userEmail").value}<br>
+            <strong>Role:</strong> ${document.getElementById("userRole").value}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+      e.target.reset();
+    });
+
+    document.getElementById("orderForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const productIds = document.getElementById("orderProductIds").value.split(",").map(id => id.trim());
+      const quantity = parseInt(document.getElementById("orderQuantity").value);
+      const productPayload = productIds.map(id => ({ productId: id, quantity }));
+      const payload = {
+        customerId: document.getElementById("orderCustomerId").value,
+        productIds: productPayload
+      };
+      const res = await fetch(`${baseURL}/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      document.getElementById("output").innerHTML = `<h3>Order Created:</h3><pre>${JSON.stringify(result, null, 2)}</pre>`;
+      e.target.reset();
+    });
+
+    document.getElementById("cartForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userId = document.getElementById("cartUserId").value;
+      const payload = {
+        productId: document.getElementById("cartProductId").value,
+        quantity: parseInt(document.getElementById("cartQuantity").value)
+      };
+      const res = await fetch(`${baseURL}/cart/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      document.getElementById("output").innerHTML = `<h3>Item added to your cart!</h3>`;
+    });
+
+    async function viewCart() {
+      const userId = document.getElementById("viewCartUserId").value;
+      const res = await fetch(`${baseURL}/cart/${userId}`);
+      const data = await res.json();
+
+      let html = "<h3>Cart:</h3><ol>";
+
+      if (data != null) {
+        data.items.forEach((item) => {
+          const product = item.product;
+          html += `<li>${product.name} (Quantity: ${item.quantity}) - Price: R${product.price}</li>`;
+        });
+
+        html += "</ol>";
+      } else {
+        html += "<p>Your cart is empty</p>"
+      }
+      document.getElementById("output").innerHTML = html;
+
+    }
+
+    document.getElementById("reviewForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const productId = document.getElementById("reviewProductId").value;
+      const payload = {
+        userId: document.getElementById("reviewUserId").value,
+        rating: parseInt(document.getElementById("reviewRating").value),
+        comment: document.getElementById("reviewComment").value
+      };
+      const res = await fetch(`${baseURL}/products/${productId}/reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      document.getElementById("output").innerHTML = `<h3>Review Added, thank you for your feedback</h3>`;
+      e.target.reset();
+    });
+
+    // Load initial data
+    updateDeleteDropdown();
+  </script>
+
+</body>
+
+</html>
