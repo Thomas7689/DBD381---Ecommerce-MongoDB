@@ -180,34 +180,123 @@
     async function getProducts() {
       const res = await fetch(`${baseURL}/products`);
       const data = await res.json();
-      document.getElementById('output').innerHTML = `<h3>Products:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = `<h3>Products:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(products => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${products.name}<br>
+            <strong>ID:</strong> ${products._id}<br>
+            <strong>Category:</strong> ${products.category}<br>
+            <strong>Price:</strong> ${products.price}<br>
+            <strong>Total inventory:</strong> ${products._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
       updateDeleteDropdown();
     }
 
     async function getUsers() {
       const res = await fetch(`${baseURL}/users`);
       const data = await res.json();
-      document.getElementById('output').innerHTML = `<h3>Users:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = `<h3>Users:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(user => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${user.firstName} ${user.lastName}<br>
+            <strong>Email:</strong> ${user.email}<br>
+            <strong>Role:</strong> ${user.role}<br>
+            <strong>ID:</strong> ${user._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
     }
 
     async function getOrders() {
       const res = await fetch(`${baseURL}/orders`);
       const data = await res.json();
-      document.getElementById('output').innerHTML = `<h3>Orders:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = '<h3>Orders:</h3>';
+
+      data.forEach(order => {
+        html += `
+      <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px; border-radius:6px;">
+        <strong>Customer ID:</strong> ${order.customer?._id || order.customer}<br>
+        <strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleString()}<br>
+        <strong>Payment Status:</strong> ${order.paymentStatus}<br>
+        <strong>Total Amount:</strong> $${order.totalAmount}<br>
+        <strong>Products:</strong>
+        <ul style="margin: 0; padding-left: 80px; padding-top: 0px">
+    `;
+
+        order.products.forEach(p => {
+          const productId = p.product?._id || p.product;
+          const productName = p.product?.name || 'N/A';
+          html += `<li>Product ID: ${productId} (Quantity: ${p.quantity})</li>`;
+        });
+
+        html += '</ul></div>';
+      });
+
+      document.getElementById('output').innerHTML = html;
     }
 
     async function searchProducts() {
       const category = document.getElementById('searchCategory').value;
       const res = await fetch(`${baseURL}/products/search/${category}`);
       const data = await res.json();
-      document.getElementById('output').innerHTML = `<h3>Product Search:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = `<h3>Products:</h3><ul style="list-style: none; padding: 0;">`;
+      let count = 1;
+
+      data.forEach(products => {
+        html += `
+        <strong>${count++}.</strong>
+        <li>
+            <strong>Name:</strong> ${products.name}<br>
+            <strong>ID:</strong> ${products._id}<br>
+            <strong>Category:</strong> ${products.category}<br>
+            <strong>Price:</strong> ${products.price}<br>
+            <strong>Total inventory:</strong> ${products._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
+
     }
 
     async function searchUsers() {
       const query = document.getElementById('searchUserQuery').value;
       const res = await fetch(`${baseURL}/users/search/${query}`);
       const data = await res.json();
-      document.getElementById('output').innerHTML = `<h3>User Search:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = `<h3>Users:</h3><ul style="list-style: none; padding: 0;">`;
+
+
+      data.forEach(user => {
+        html += `
+        <li>
+            <strong>Name:</strong> ${user.firstName} ${user.lastName}<br>
+            <strong>Email:</strong> ${user.email}<br>
+            <strong>Role:</strong> ${user.role}<br>
+            <strong>ID:</strong> ${user._id}
+        </li>`;
+      });
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
     }
 
     async function updateDeleteDropdown() {
@@ -236,8 +325,21 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(product)
       });
+
+      let html = `<h3>Product Added:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>Name:</strong> ${document.getElementById("name").value}<br>
+            <strong>Category:</strong> ${document.getElementById("category").value}<br>
+            <strong>Price:</strong> ${document.getElementById("price").value}<br>
+            <strong>Inventory:</strong> ${document.getElementById("inventory").value}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
       const result = await res.json();
-      document.getElementById("output").innerHTML = `<h3>Product Added:</h3><pre>${JSON.stringify(result, null, 2)}</pre>`;
       e.target.reset();
       updateDeleteDropdown();
     });
@@ -247,7 +349,20 @@
       const id = document.getElementById("deleteSelect").value;
       const res = await fetch(`${baseURL}/products/${id}`, { method: "DELETE" });
       const result = await res.json();
-      document.getElementById("output").innerHTML = `<h3>Product Deleted:</h3><pre>${JSON.stringify(result, null, 2)}</pre>`;
+
+      let html = `<h3>Product Deleted:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>Name:</strong> ${result.name}<br>
+            <strong>Category:</strong> ${result._id}<br>
+            <strong>Price:</strong> ${result.category}<br>
+            <strong>Inventory:</strong> ${result.price}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById("output").innerHTML = html;
       updateDeleteDropdown();
     });
 
@@ -265,7 +380,20 @@
         body: JSON.stringify(user)
       });
       const result = await res.json();
-      document.getElementById("output").innerHTML = `<h3>User Added:</h3><pre>${JSON.stringify(result, null, 2)}</pre>`;
+
+      let html = `<h3>User Added:</h3><ul style="list-style: none; padding: 0;">`;
+
+      html += `
+        <li>
+            <strong>First name:</strong> ${document.getElementById("userFirstName").value}<br>
+            <strong>Last name:</strong> ${document.getElementById("userLastName").value}<br>
+            <strong>Email:</strong> ${document.getElementById("userEmail").value}<br>
+            <strong>Role:</strong> ${document.getElementById("userRole").value}
+        </li>`;
+
+      html += `</ul>`;
+
+      document.getElementById('output').innerHTML = html;
       e.target.reset();
     });
 
@@ -301,14 +429,28 @@
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-      document.getElementById("output").innerHTML = `<h3>Cart Updated:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+      document.getElementById("output").innerHTML = `<h3>Item added to your cart!</h3>`;
     });
 
     async function viewCart() {
       const userId = document.getElementById("viewCartUserId").value;
       const res = await fetch(`${baseURL}/cart/${userId}`);
       const data = await res.json();
-      document.getElementById("output").innerHTML = `<h3>Cart Contents:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+      let html = "<h3>Cart:</h3><ol>";
+
+      if (data != null) {
+        data.items.forEach((item) => {
+          const product = item.product;
+          html += `<li>${product.name} (Quantity: ${item.quantity}) - Price: R${product.price}</li>`;
+        });
+
+        html += "</ol>";
+      } else {
+        html += "<p>Your cart is empty</p>"
+      }
+      document.getElementById("output").innerHTML = html;
+
     }
 
     document.getElementById("reviewForm").addEventListener("submit", async (e) => {
@@ -325,7 +467,7 @@
         body: JSON.stringify(payload)
       });
       const result = await res.json();
-      document.getElementById("output").innerHTML = `<h3>Review Added:</h3><pre>${JSON.stringify(result, null, 2)}</pre>`;
+      document.getElementById("output").innerHTML = `<h3>Review Added, thank you for your feedback</h3>`;
       e.target.reset();
     });
 
