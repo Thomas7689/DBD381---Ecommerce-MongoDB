@@ -1,0 +1,102 @@
+[
+  {
+    "customer": "6838339795fe53eb8a6cf05b",
+    "products": [
+      {
+        "product": "6838339795fe53eb8a6cf07b",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf080"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf060",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf081"
+      }
+    ],
+    "totalAmount": 1727,
+    "orderDate": "2025-05-28T14:53:50.140Z",
+    "paymentStatus": "Paid",
+    "_id": "6838339795fe53eb8a6cf07f",
+    "__v": 0
+  },
+  {
+    "customer": "6838339795fe53eb8a6cf059",
+    "products": [
+      {
+        "product": "6838339795fe53eb8a6cf078",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf083"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 3,
+        "_id": "6838339795fe53eb8a6cf084"
+      }
+    ],
+    "totalAmount": 873,
+    "orderDate": "2025-05-28T19:49:22.505Z",
+    "paymentStatus": "Pending",
+    "_id": "6838339795fe53eb8a6cf082",
+    "__v": 0
+  },
+  {
+    "customer": "6838339795fe53eb8a6cf05c",
+    "products": [
+      {
+        "product": "6838339795fe53eb8a6cf078",
+        "quantity": 3,
+        "_id": "6838339795fe53eb8a6cf086"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf087"
+      }
+    ],
+    "totalAmount": 955,
+    "orderDate": "2025-05-28T16:42:13.872Z",
+    "paymentStatus": "Paid",
+    "_id": "6838339795fe53eb8a6cf085",
+    "__v": 0
+  },
+  {
+    "customer": "6838339795fe53eb8a6cf055",
+    "products": [
+      {
+        "product": "6838339795fe53eb8a6cf069",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf089"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf066",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf08a"
+      }
+    ],
+    "totalAmount": 1059,
+    "orderDate": "2025-05-29T04:32:50.573Z",
+    "paymentStatus": "Pending",
+    "_id": "6838339795fe53eb8a6cf088",
+    "__v": 0
+  },
+  {
+    "customer": "6838339795fe53eb8a6cf05a",
+    "products": [
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 3,
+        "_id": "6838339795fe53eb8a6cf08c"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf060",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf08d"
+      }
+    ],
+    "totalAmount": 827,
+    "orderDate": "2025-05-29T08:32:00.374Z",
+    "paymentStatus": "Pending",
+    "_id": "6838339795fe53eb8a6cf08b",
+    "__v": 0
+  }
+]

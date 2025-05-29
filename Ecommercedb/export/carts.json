@@ -1,0 +1,117 @@
+[
+  {
+    "user": "6838339795fe53eb8a6cf05d",
+    "items": [
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 3,
+        "_id": "6838339795fe53eb8a6cf090"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf075",
+        "quantity": 3,
+        "_id": "6838339795fe53eb8a6cf091"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf069",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf092"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf08f",
+    "updatedAt": "2025-05-29T10:14:47.607Z",
+    "__v": 0
+  },
+  {
+    "user": "6838339795fe53eb8a6cf057",
+    "items": [
+      {
+        "product": "6838339795fe53eb8a6cf066",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf094"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf06c",
+        "quantity": 4,
+        "_id": "6838339795fe53eb8a6cf095"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf096"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf093",
+    "updatedAt": "2025-05-29T10:14:47.607Z",
+    "__v": 0
+  },
+  {
+    "user": "6838339795fe53eb8a6cf05b",
+    "items": [
+      {
+        "product": "6838339795fe53eb8a6cf075",
+        "quantity": 4,
+        "_id": "6838339795fe53eb8a6cf098"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf060",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf099"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf07b",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf09a"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf097",
+    "updatedAt": "2025-05-29T10:14:47.607Z",
+    "__v": 0
+  },
+  {
+    "user": "6838339795fe53eb8a6cf05a",
+    "items": [
+      {
+        "product": "6838339795fe53eb8a6cf078",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf09c"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf069",
+        "quantity": 4,
+        "_id": "6838339795fe53eb8a6cf09d"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf063",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf09e"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf09b",
+    "updatedAt": "2025-05-29T10:14:47.607Z",
+    "__v": 0
+  },
+  {
+    "user": "6838339795fe53eb8a6cf057",
+    "items": [
+      {
+        "product": "6838339795fe53eb8a6cf06f",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf0a0"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf066",
+        "quantity": 1,
+        "_id": "6838339795fe53eb8a6cf0a1"
+      },
+      {
+        "product": "6838339795fe53eb8a6cf075",
+        "quantity": 2,
+        "_id": "6838339795fe53eb8a6cf0a2"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf09f",
+    "updatedAt": "2025-05-29T10:14:47.607Z",
+    "__v": 0
+  }
+]

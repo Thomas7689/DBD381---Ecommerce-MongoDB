@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Tasty Plastic Car",
+    "category": "Electronics",
+    "price": 19,
+    "inventory": 181,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf05b",
+        "rating": 5,
+        "comment": "Est voluptas explicabo aliquam et doloribus.",
+        "_id": "6838339795fe53eb8a6cf070",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf058",
+        "rating": 3,
+        "comment": "Ipsum dicta fugit consequuntur deserunt quia.",
+        "_id": "6838339795fe53eb8a6cf071",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf06f",
+    "__v": 0
+  },
+  {
+    "name": "Intelligent Wooden Keyboard",
+    "category": "Beauty",
+    "price": 370,
+    "inventory": 89,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf055",
+        "rating": 3,
+        "comment": "Nihil dolorem error recusandae aliquam veniam.",
+        "_id": "6838339795fe53eb8a6cf067",
+        "timestamp": "2025-05-29T10:14:47.577Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf05d",
+        "rating": 4,
+        "comment": "Explicabo atque sequi et.",
+        "_id": "6838339795fe53eb8a6cf068",
+        "timestamp": "2025-05-29T10:14:47.577Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf066",
+    "__v": 0
+  },
+  {
+    "name": "Refined Metal Fish",
+    "category": "Outdoors",
+    "price": 917,
+    "inventory": 157,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf055",
+        "rating": 4,
+        "comment": "Nulla magnam eum distinctio ipsam sequi fuga quasi dolorem.",
+        "_id": "6838339795fe53eb8a6cf076",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf059",
+        "rating": 3,
+        "comment": "Sed qui aperiam.",
+        "_id": "6838339795fe53eb8a6cf077",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf075",
+    "__v": 0
+  },
+  {
+    "name": "Awesome Concrete Car",
+    "category": "Music",
+    "price": 689,
+    "inventory": 100,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf058",
+        "rating": 4,
+        "comment": "Ex dolorem ut ex est quibusdam mollitia est beatae dolore.",
+        "_id": "6838339795fe53eb8a6cf06a",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf056",
+        "rating": 4,
+        "comment": "Dolores consequatur voluptatem aperiam consectetur.",
+        "_id": "6838339795fe53eb8a6cf06b",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf069",
+    "__v": 0
+  },
+  {
+    "name": "Gorgeous Granite Table",
+    "category": "Shoes",
+    "price": 762,
+    "inventory": 98,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf05c",
+        "rating": 5,
+        "comment": "Quas atque et.",
+        "_id": "6838339795fe53eb8a6cf07c",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf059",
+        "rating": 3,
+        "comment": "Est qui deserunt eaque.",
+        "_id": "6838339795fe53eb8a6cf07d",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf07b",
+    "__v": 0
+  },
+  {
+    "name": "Tasty Cotton Towels",
+    "category": "Toys",
+    "price": 168,
+    "inventory": 65,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf059",
+        "rating": 4,
+        "comment": "Nisi dolor occaecati sit et molestias.",
+        "_id": "6838339795fe53eb8a6cf06d",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf056",
+        "rating": 4,
+        "comment": "Voluptatibus assumenda molestias voluptas accusantium laboriosam ipsam tempore veritatis sint.",
+        "_id": "6838339795fe53eb8a6cf06e",
+        "timestamp": "2025-05-29T10:14:47.578Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf06c",
+    "__v": 0
+  },
+  {
+    "name": "Tasty Granite Tuna",
+    "category": "Electronics",
+    "price": 685,
+    "inventory": 179,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf059",
+        "rating": 3,
+        "comment": "Facilis necessitatibus soluta illum at maiores sint quia.",
+        "_id": "6838339795fe53eb8a6cf073",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf058",
+        "rating": 3,
+        "comment": "Eum rerum odit earum doloribus nihil.",
+        "_id": "6838339795fe53eb8a6cf074",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf072",
+    "__v": 0
+  },
+  {
+    "name": "Sleek Cotton Chicken",
+    "category": "Automotive",
+    "price": 203,
+    "inventory": 196,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf05c",
+        "rating": 4,
+        "comment": "Cum facilis est mollitia similique enim reprehenderit molestiae quas sed.",
+        "_id": "6838339795fe53eb8a6cf061",
+        "timestamp": "2025-05-29T10:14:47.576Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf055",
+        "rating": 5,
+        "comment": "Nulla aliquam qui pariatur reiciendis aut.",
+        "_id": "6838339795fe53eb8a6cf062",
+        "timestamp": "2025-05-29T10:14:47.576Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf060",
+    "__v": 0
+  },
+  {
+    "name": "Sleek Plastic Mouse",
+    "category": "Automotive",
+    "price": 249,
+    "inventory": 193,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf059",
+        "rating": 3,
+        "comment": "Ut numquam corporis expedita expedita molestias quidem error.",
+        "_id": "6838339795fe53eb8a6cf079",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf05a",
+        "rating": 5,
+        "comment": "Sunt error voluptatum facere et sit tempore minus quaerat quia.",
+        "_id": "6838339795fe53eb8a6cf07a",
+        "timestamp": "2025-05-29T10:14:47.579Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf078",
+    "__v": 0
+  },
+  {
+    "name": "Unbranded Metal Chicken",
+    "category": "Sports",
+    "price": 208,
+    "inventory": 15,
+    "reviews": [
+      {
+        "userId": "6838339795fe53eb8a6cf05c",
+        "rating": 5,
+        "comment": "Qui voluptates earum ea nobis sit unde.",
+        "_id": "6838339795fe53eb8a6cf064",
+        "timestamp": "2025-05-29T10:14:47.577Z"
+      },
+      {
+        "userId": "6838339795fe53eb8a6cf05b",
+        "rating": 3,
+        "comment": "Alias est sapiente debitis amet.",
+        "_id": "6838339795fe53eb8a6cf065",
+        "timestamp": "2025-05-29T10:14:47.577Z"
+      }
+    ],
+    "_id": "6838339795fe53eb8a6cf063",
+    "__v": 0
+  }
+]

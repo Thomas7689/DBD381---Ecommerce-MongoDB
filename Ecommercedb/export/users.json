@@ -1,0 +1,92 @@
+[
+  {
+    "firstName": "Jaylan",
+    "lastName": "Huel",
+    "email": "Colton_Funk@hotmail.com",
+    "password": "qYmWeTEVlz",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf05c",
+    "__v": 0
+  },
+  {
+    "firstName": "Katelyn",
+    "lastName": "Wiza",
+    "email": "Jaylen.Christiansen@yahoo.com",
+    "password": "z9VJ3CEMab",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf059",
+    "__v": 0
+  },
+  {
+    "firstName": "Soledad",
+    "lastName": "McDermott",
+    "email": "Gerhard59@gmail.com",
+    "password": "kcz_0x9OXS",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf05d",
+    "__v": 0
+  },
+  {
+    "firstName": "Uriel",
+    "lastName": "Parker",
+    "email": "Carissa_Wiza@gmail.com",
+    "password": "k0lD_d9gaS",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf058",
+    "__v": 0
+  },
+  {
+    "firstName": "Jerel",
+    "lastName": "Swaniawski",
+    "email": "Magnolia13@hotmail.com",
+    "password": "SYWqKPz7ou",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf05b",
+    "__v": 0
+  },
+  {
+    "firstName": "Cassandre",
+    "lastName": "Jerde",
+    "email": "Aliya.Adams@yahoo.com",
+    "password": "FXnLS6XmjH",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf05a",
+    "__v": 0
+  },
+  {
+    "firstName": "Lina",
+    "lastName": "Bartoletti",
+    "email": "Beaulah_Fisher@yahoo.com",
+    "password": "sGItFqj9bh",
+    "role": "admin",
+    "_id": "6838339795fe53eb8a6cf055",
+    "__v": 0
+  },
+  {
+    "firstName": "Junior",
+    "lastName": "Kessler",
+    "email": "Alysha.Hirthe97@hotmail.com",
+    "password": "oO05B5a54M",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf056",
+    "__v": 0
+  },
+  {
+    "firstName": "Cecelia",
+    "lastName": "Lynch",
+    "email": "Fay45@hotmail.com",
+    "password": "hSCUTKOZeM",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf05e",
+    "__v": 0
+  },
+  {
+    "firstName": "Anne",
+    "lastName": "Beier",
+    "email": "Gwendolyn.Smitham65@gmail.com",
+    "password": "ywrvjhPEK2",
+    "role": "customer",
+    "_id": "6838339795fe53eb8a6cf057",
+    "__v": 0
+  }
+]
